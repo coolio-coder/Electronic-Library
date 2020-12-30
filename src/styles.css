@@ -1,25 +1,45 @@
+@font-face {
+    font-family: 'nidus_sansregular';
+    src: url('nidsans-webfont.eot');
+    src: url('nidsans-webfont.eot?#iefix') format('embedded-opentype'),
+         url('nidsans-webfont.woff2') format('woff2'),
+         url('nidsans-webfont.woff') format('woff'),
+         url('nidsans-webfont.ttf') format('truetype'),
+         url('nidsans-webfont.svg#nidus_sansregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+    font-family: 'nidus_sansregular';
+}
+
+body {
+    background: linear-gradient(0deg, #0c0931, #1d1856, #e80074,#c200db , #00cfe5 90%);
 }
 
 html{
-    margin: 10px;
     width: 100vw;
     height: 100vh;
-    background-color: lightgray;
 }
 
-.title {
+.title, .titleParagraph {
     text-align: center;
     position: relative;
+    color: #0c0931;
+}
+.title {
+    top: 20px;
     font-size: 40px;
+    font-weight: 500;
 }
 
 .titleParagraph {
-    top: 10px;
-    text-align: center;
-    position: relative;
-    font-size: 26px;
+    top: 20px;
+    font-size: 30px;
+    font-weight: 600;
 }
+
