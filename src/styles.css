@@ -66,7 +66,7 @@ html{
 }
 
 .bkimage2 {
-    min-height: 400px;
+    min-height: 500px;
 }
 
 .genre {
@@ -78,15 +78,21 @@ html{
     width: 100%;
     top: 40%;
 
-    text-align: left;
-    position: relative;
     opacity: 1;
-    color: white;
+    color: 	#ff2975;
     font-size: 90px;
 }
 
+.genre-name {
+    display: inline-block;
+}
+
 .triangle_container {
-    border: solid red;
+    position: relative;
+    left: 15px;
+    width: 15fr;
+    height: 50fr;
+    overflow-y: auto;
 }
 
 
@@ -94,24 +100,38 @@ html{
     width: 0;
     height: 0;
     opacity: 0.6;
-    border-left: 90px solid transparent;
-    border-right: 90px solid transparent;
-    border-bottom: 140px solid #c200db;
-    left: 25em;
-    text-align: left;
+    margin: 20px 0px;
+    border-left: 120px solid transparent;
+    border-right: 120px solid transparent;
+    border-bottom: 170px solid #c200db;
+    
     position: relative;
-
     float: left;
-  }
+}
 
 .triangle-down {
     width: 0;
     height: 0;
     opacity: 0.6;
-    border-left: 90px solid transparent;
-    border-right: 90px solid transparent;
-    border-top: 140px solid #c200db; 
-    left: 20em;
-    text-align: left;
+    margin: 20px 0px;
+    border-left: 120px solid transparent;
+    border-right: 120px solid transparent;
+    border-top: 170px solid #c200db; 
+    
+    float: left;
     position: relative;
+}
+
+button {
+    color: 	#f222ff;
+    font-size: 30px;
+    background-color: transparent;
+    background-repeat: no-repeat;
+    border: 3px solid 	#8c1eff;
+    cursor: pointer;
+    overflow: hidden;
+    outline: none;
+
+    position: relative;
+    bottom: 20px;
 }

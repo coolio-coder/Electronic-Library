@@ -1,8 +1,8 @@
 var myLibrary = [];
 
-const book1 = new books('Harry Potter', 'Jk Rowling', 502, 'read');
-const book2 = new books('GOT', 'Tokien', 402, 'not read');
-const book3 = new books('Eragon', 'Chris', 422, 'read');
+const book1 = new books('Harry Potter', 'Jk Rowling', 636, 'read');
+const book2 = new books('A Song of Ice and Fire', 'George R. R. Martin', 694, 'not read');
+const book3 = new books('Eragon', 'Christopher Paolini', 509, 'read');
 
 function books (title, author, page, read) {
   this.title = title;
@@ -30,8 +30,14 @@ book3.addBook();
 
 
 
-function addTriangle() {
+function addTriangleUp() {
   const div = document.createElement('div');
   div.className = 'triangle-up';
+  document.getElementById('hey').appendChild(div);
+}
+
+function addTriangleDown() {
+  const div = document.createElement('div');
+  div.className = 'triangle-down';
   document.getElementById('hey').appendChild(div);
 }
