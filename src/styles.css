@@ -96,30 +96,26 @@ html{
 }
 
 
-.triangle-up {
+.triangle {
     width: 0;
     height: 0;
     opacity: 0.6;
     margin: 20px 0px;
-    border-left: 120px solid transparent;
-    border-right: 120px solid transparent;
-    border-bottom: 170px solid #c200db;
     
     position: relative;
     float: left;
 }
 
-.triangle-down {
-    width: 0;
-    height: 0;
-    opacity: 0.6;
-    margin: 20px 0px;
+.up {
+    border-left: 120px solid transparent;
+    border-right: 120px solid transparent;
+    border-bottom: 170px solid #c200db;
+}
+
+.down {
     border-left: 120px solid transparent;
     border-right: 120px solid transparent;
     border-top: 170px solid #c200db; 
-    
-    float: left;
-    position: relative;
 }
 
 button {
