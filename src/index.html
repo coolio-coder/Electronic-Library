@@ -18,12 +18,24 @@
     
     <!--BOOKSHELF-->
     <div class='genre'> 
+        <!-- Title of genre and the button to add a book -->
         <p class ='genre-name' id='hey'>Unsorted Books
             <button type='button' class='addTriangle' onclick='addTriangle()'>Add Book</button>
+            <button type='button' id='openModal' onclick='openModal()'>Open Modal</button>
         </p>
+
+        <div id='myModal' class='modal'>
+            <div class='modalContent'>
+                <span class='close'>&times;</span>
+                <p>This is a test for Modal Feature...</p>
+            </div>
+        </div>
+        <!-- //Container to keep all the book frames -->
         <div class='triangle_container' id='unsorted'>
         </div>
     </div>
+
+    
     
 
     <div class='genre'> 

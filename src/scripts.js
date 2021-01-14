@@ -23,12 +23,22 @@ function Books (title, author, page, read) {
   }
 }
 
+/***************
+ * ADD BOOK BUTTON
+ */
+
 var triangleInfo = []
 var trianglePosition = new Object();
 
 function addTriangleUp() {
   const div = document.createElement('div');
   div.className = 'triangle up';
+  document.getElementById('unsorted').appendChild(div);
+}
+
+function addTriangleDown() {
+  const div = document.createElement('div');
+  div.className = 'triangle down';
   document.getElementById('unsorted').appendChild(div);
 }
 
@@ -51,8 +61,22 @@ function addTriangle () {
   //Update the triangle array
 }
 
-function addTriangleDown() {
-  const div = document.createElement('div');
-  div.className = 'triangle down';
-  document.getElementById('unsorted').appendChild(div);
+/*****
+ * OPEN MODAL BUTTON
+ */
+
+var modal = document.getElementById('myModal');
+var btn = document.getElementById('openModal');
+var span = document.getElementsByClassName("close")[0];
+
+btn.onclick = function() {
+  modal.style.display = "block";
+}
+span.onclick = function() {
+  modal.style.display = "none";
+}
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
 }
