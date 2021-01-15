@@ -71,12 +71,21 @@ var span = document.getElementsByClassName("close")[0];
 
 btn.onclick = function() {
   modal.style.display = "block";
+  window.addEventListener('scroll', noScroll);
 }
 span.onclick = function() {
   modal.style.display = "none";
+  window.removeEventListener('scroll', noScroll);
 }
 window.onclick = function(event) {
   if (event.target == modal) {
     modal.style.display = "none";
+    window.removeEventListener('scroll', noScroll);
   }
+}
+
+//Prevent Scrolling when you open up your modal
+
+function noScroll () {
+  window.scrollTo(1200,1200);
 }
