@@ -11,7 +11,7 @@ function Books (title, author, page, read) {
   this.read = read;
 
   //This method will add a book to the library
-  this.addBook = function () {
+  this.addToLibrary = function () {
     myLibrary.push(this)
     console.log(myLibrary);
   }
@@ -26,6 +26,19 @@ function Books (title, author, page, read) {
 /***************
  * ADD BOOK BUTTON
  */
+
+var titleValue = document.getElementById('title');
+var authorValue = document.getElementById('author').value;
+var pageValue = document.getElementById('page').value;
+var genreValue = document.getElementById('Genre').value;
+
+addBook = () => {
+  console.log(12)
+  console.log(titleValue)
+
+  modal.style.display = "none";
+}
+
 
 var triangleInfo = []
 var trianglePosition = new Object();
@@ -87,5 +100,5 @@ window.onclick = function(event) {
 //Prevent Scrolling when you open up your modal
 
 function noScroll () {
-  window.scrollTo(1200,1200);
+  window.scrollTo(0,1200);
 }
