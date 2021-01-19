@@ -1,8 +1,8 @@
 var myLibrary = [];
 
-const book1 = new Books('Harry Potter', 'Jk Rowling', 636, 'adventure', 'read');
-const book2 = new Books('A Song of Ice and Fire', 'George R. R. Martin', 694, 'adventure' ,'not read');
-const book3 = new Books('Eragon', 'Christopher Paolini', 509, 'adventure' ,'read');
+// const book1 = new Books('Harry Potter', 'Jk Rowling', 636, 'adventure', 'read');
+// const book2 = new Books('A Song of Ice and Fire', 'George R. R. Martin', 694, 'adventure' ,'not read');
+// const book3 = new Books('Eragon', 'Christopher Paolini', 509, 'adventure' ,'read');
 
 function Books (title, author, page, genre, read) {
   this.title = title;
@@ -28,17 +28,21 @@ function Books (title, author, page, genre, read) {
   }
 }
 
+const capitalize = str => {
+  var str = str.toLowerCase().split(' ').map(word => 
+    word[0].toUpperCase() + word.slice(1)).join(' ');
+  return str;
+}
+
 /********************************************ADD BOOK BUTTON***********************************/
 
+//Reset the Slider
 function changeSlider() {
   document.querySelector('.slider').style.transform = 'translateX(26px)';
   document.querySelector('.slider').style.webkitTransform = 'translateX(26px)';
   document.querySelector('.slider').style.msTransform = 'translateX(26px)';
-  
   document.querySelector('.slider').style.backgroundColor = 'red';
-
 }
-
 
 // Add to Library //
 function getInputVal () {
@@ -46,16 +50,30 @@ function getInputVal () {
       authorVal = document.getElementById('author').value,
       pageVal = document.getElementById('page').value,
       genreVal = document.getElementById('Genre').value;
-  //Function to add a div that 
 
+  //Capitalize all strings
+  
   if(titleVal, authorVal, pageVal === '') {
     alert('Please fill out the required information.')
   } else {
+    titleVal = capitalize(titleVal);
+    authorVal = capitalize(authorVal);
+    genreVal = capitalize(genreVal);
+    //Add the book to the library
     myLibrary.push(new Books(titleVal, authorVal, pageVal, genreVal, readState[0]))
-    addTriangle();
-    //Close modal
-    modal.style.display = "none";
+    //Based on the genre that user inputs, this conditional will decide where to put the book
+    if(genreList.includes(genreVal)) {
+      addTriangle(genreVal);
+    } else if (!genreList.includes(genreVal)) {
+      addGenre(genreVal);
+      addTriangle(genreVal);
+    } else {
+      addTriangle('unsorted')
+    }
   }
+
+  //Close modal
+  modal.style.display = "none";
 
   document.getElementById('title').value = '';
   document.getElementById('author').value = '';
@@ -75,29 +93,30 @@ function haveReadState () {
 
 // Add Book frame
 var triangleInfo = []
-var trianglePosition = new Object();
 
-function addTriangleUp() {
+function addTriangleUp(genreVal) {
   const div = document.createElement('div');
   div.className = 'triangle up';
-  document.getElementById('unsorted').appendChild(div);
+  document.getElementById(`${genreVal}_shelf`).appendChild(div);
 }
-
-function addTriangleDown() {
+function addTriangleDown(genreVal) {
   const div = document.createElement('div');
   div.className = 'triangle down';
-  document.getElementById('unsorted').appendChild(div);
+  document.getElementById(`${genreVal}_shelf`).appendChild(div);
 }
 
-function addTriangle () {
+function addTriangle (genreVal) {
+  //Test if triangle info array contains the genre
+  if (!triangleInfo.includes(genreVal))
+
   //Use triangle array to detect the triangle position
   if (triangleInfo.length === 0 || triangleInfo[0].isUp === false) {
-    addTriangleUp();
+    addTriangleUp(genreVal);
     //Set the position of the triangle to be true then push onto the array
     trianglePosition.isUp = true;
     triangleInfo.push(trianglePosition);
   } else {
-    addTriangleDown();
+    addTriangleDown(genreVal);
     //Set the position of the triangle to be false
     trianglePosition.isUp = false;
   }
@@ -113,16 +132,33 @@ function addTriangle () {
 //   document.getElementById('')
 // }
 
-//Add Genre
 
-function addGenre () {
+//Add Genre (Genre div, genre name, bookframe)
+
+var genreList = [];
+
+function addGenre (newGenre) {
+  genreList.push(newGenre);
   const div = document.createElement('div');
+
+  const containerDiv = document.createElement('div');
   const p = document.createElement('p');
-  //Create new Genre
+
+  //Create new genre div, 1) genre title & 2) triangle container for book covers and id for book covers
   div.className = 'genre';
-  //Add new Genre to the main body
+  div.id = `${newGenre}_Genre`;
+
+  p.className = 'genre-name';
+  p.id = `${newGenre}_title`
+  containerDiv.className = 'triangle_container';
+  containerDiv.id = `${newGenre}_shelf`;
+
+  //Add new items to the main body
   document.getElementById('bookshelf').appendChild(div);
-  console.log('hello')
+
+  document.getElementById(`${newGenre}_Genre`).appendChild(p);
+  document.getElementById(`${newGenre}_Genre`).appendChild(containerDiv);
+  document.getElementById(`${newGenre}_title`).innerHTML = `${newGenre}`;
 }
 
 /*****

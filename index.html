@@ -21,7 +21,7 @@
         <div class='genre'> 
             <!-- Title of genre and the button to add a book -->
             <p class ='genre-name' id='hey'>Unsorted Books
-                <button type='button' class='addTriangle' onclick='addTriangle()'>Add Book</button>
+                <button type='button' class='addTriangle' onclick='addTriangle("unsorted")'>Add Book</button>
                 <button type='button' id='openModal' onclick='openModal()'>Open Modal</button>
             </p>
 
@@ -79,20 +79,11 @@
                 </div>
             </div>
             <!-- //Container to keep all the book frames -->
-            <div class='triangle_container' id='unsorted'>
+            <div class='triangle_container' id='unsorted_shelf'>
             </div>
         </div>
-
-        
-        
-
-        <div class='genre'> 
-            <p class="genre-name">Adventure</p>
-        </div>
-        <div class='genre'> 
-            <p class='genre-name'>Horror</p>
-        </div>
-        <button type="button" id='addGenre' onclick="addGenre();">add genre</button>
+        <!-- <input type='text' id='addNewGenre'>
+        <button type="button" id='addGenre' onclick="addGenre();">add genre</button> -->
     </div>
     <div class='bkimage2'></div>
 
