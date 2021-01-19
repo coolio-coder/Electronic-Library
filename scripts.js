@@ -97,6 +97,7 @@ var triangleInfo = []
 function addTriangleUp(genreVal) {
   const div = document.createElement('div');
   div.className = 'triangle up';
+  console.log(document.getElementById(`${genreVal}_shelf`))
   document.getElementById(`${genreVal}_shelf`).appendChild(div);
 }
 function addTriangleDown(genreVal) {
@@ -105,12 +106,21 @@ function addTriangleDown(genreVal) {
   document.getElementById(`${genreVal}_shelf`).appendChild(div);
 }
 
-function addTriangle (genreVal) {
-  //Test if triangle info array contains the genre
-  if (!triangleInfo.includes(genreVal))
+function addTriangle (genreVal = 'unsorted') {
 
+  //Test if triangle info array does not contain the genre, then we create a new obj in the array
+  if (!triangleInfo.includes(genreVal)) {
+    temp = new Object();
+    console.log(temp)
+    console.log(unsorted)
+    genreVal.isUp = false;
+    triangleInfo.push(genreVal)
+    console.log(genreVal)
+  }
+  
   //Use triangle array to detect the triangle position
-  if (triangleInfo.length === 0 || triangleInfo[0].isUp === false) {
+  if (triangleInfo[triangleInfo.indexOf(genreVal)].isUp === false) {
+    console.log(genreVal)
     addTriangleUp(genreVal);
     //Set the position of the triangle to be true then push onto the array
     trianglePosition.isUp = true;
