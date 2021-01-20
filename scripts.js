@@ -29,8 +29,13 @@ function Books (title, author, page, genre, read) {
 }
 
 const capitalize = str => {
-  var str = str.toLowerCase().split(' ').map(word => 
-    word[0].toUpperCase() + word.slice(1)).join(' ');
+  console.log(str)
+  if(str !== '') {
+  str = str.toLowerCase().split(' ').map(word => {
+      console.log(word)
+      word[0].toUpperCase() + word.slice(1)
+    }).join(' ');
+  }
   return str;
 }
 
@@ -49,7 +54,7 @@ function getInputVal () {
   var titleVal = document.getElementById('title').value,
       authorVal = document.getElementById('author').value,
       pageVal = document.getElementById('page').value,
-      genreVal = document.getElementById('Genre').value;
+      // genreVal = document.getElementById('Genre').value;
 
   //Capitalize all strings
   
@@ -109,14 +114,11 @@ function addTriangleDown(genreVal) {
 function addTriangle (genreVal = 'unsorted') {
 
   //Test if triangle info array does not contain the genre, then we create a new obj in the array
-  if (!triangleInfo.includes(genreVal)) {
-    temp = new Object();
-    console.log(temp)
-    console.log(unsorted)
-    genreVal.isUp = false;
-    triangleInfo.push(genreVal)
-    console.log(genreVal)
-  }
+  // if (!triangleInfo.includes(genreVal)) {
+  //   const newGenre =  {
+
+  //   }
+  // }
   
   //Use triangle array to detect the triangle position
   if (triangleInfo[triangleInfo.indexOf(genreVal)].isUp === false) {
