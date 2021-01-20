@@ -29,14 +29,12 @@ function Books (title, author, page, genre, read) {
 }
 
 const capitalize = str => {
-  console.log(str)
   if(str !== '') {
-  str = str.toLowerCase().split(' ').map(word => {
-      console.log(word)
-      word[0].toUpperCase() + word.slice(1)
-    }).join(' ');
-  }
-  return str;
+  var str = str.toLowerCase().split(' ').map(word => word[0].toUpperCase() + word.slice(1));
+    if (str.length > 1) {
+      return str.join(' ');
+    } else {return str[0]}
+  } return '';
 }
 
 /********************************************ADD BOOK BUTTON***********************************/
@@ -53,11 +51,11 @@ function changeSlider() {
 function getInputVal () {
   var titleVal = document.getElementById('title').value,
       authorVal = document.getElementById('author').value,
-      pageVal = document.getElementById('page').value,
-      // genreVal = document.getElementById('Genre').value;
+      pageVal = document.getElementById('page').value
+      genreVal = document.getElementById('Genre').value;
 
   //Capitalize all strings
-  
+  console.log(genreVal)
   if(titleVal, authorVal, pageVal === '') {
     alert('Please fill out the required information.')
   } else {
@@ -68,17 +66,23 @@ function getInputVal () {
     myLibrary.push(new Books(titleVal, authorVal, pageVal, genreVal, readState[0]))
     //Based on the genre that user inputs, this conditional will decide where to put the book
     if(genreList.includes(genreVal)) {
+      console.log('waht')
       addTriangle(genreVal);
-    } else if (!genreList.includes(genreVal)) {
+    } else if (!genreList.includes(genreVal) || genreVal !== '') {
+      console.log(genreVal)
       addGenre(genreVal);
       addTriangle(genreVal);
     } else {
       addTriangle('unsorted')
     }
   }
+  console.log(genreVal)
+  console.log(titleVal)
+  console.log(genreVal)
 
   //Close modal
   modal.style.display = "none";
+  window.removeEventListener('scroll', noScroll);
 
   document.getElementById('title').value = '';
   document.getElementById('author').value = '';
@@ -111,26 +115,53 @@ function addTriangleDown(genreVal) {
   document.getElementById(`${genreVal}_shelf`).appendChild(div);
 }
 
+var bookshelf = [];
+function addNewGenre (genre) {
+  const newGenre =  {
+    [genre]: {
+      genre: genre,
+      isUp: false
+    }
+  };
+  bookshelf.push(newGenre);
+}
+addNewGenre('Romance');
+addNewGenre('Action');
+addNewGenre('Adventure');
+
+//Finds which index the target genre is located at
+function searchTriangleInfo (target, myArray) {
+  for (var i=0; i < myArray.length; i++) {
+    if (Object.keys(myArray[i])[0] === target) {
+      return i;
+    }
+  }
+  return -1;
+}
+
 function addTriangle (genreVal = 'unsorted') {
-
+  let genreIndex = searchTriangleInfo(genreVal, triangleInfo);
   //Test if triangle info array does not contain the genre, then we create a new obj in the array
-  // if (!triangleInfo.includes(genreVal)) {
-  //   const newGenre =  {
-
-  //   }
-  // }
-  
+  if (genreIndex === -1) {
+    const newGenre =  {
+      [genreVal]: {
+        genre: genreVal,
+        isUp: false
+      }
+    };
+    triangleInfo.push(newGenre);
+  }
+  //updates triangleInfo if a new genre is pushed onto the array
+  genreIndex = searchTriangleInfo(genreVal, triangleInfo);
   //Use triangle array to detect the triangle position
-  if (triangleInfo[triangleInfo.indexOf(genreVal)].isUp === false) {
-    console.log(genreVal)
+  if (triangleInfo[genreIndex][genreVal].isUp === false) {
     addTriangleUp(genreVal);
     //Set the position of the triangle to be true then push onto the array
-    trianglePosition.isUp = true;
-    triangleInfo.push(trianglePosition);
+    triangleInfo[genreIndex][genreVal].isUp = true;
   } else {
     addTriangleDown(genreVal);
     //Set the position of the triangle to be false
-    trianglePosition.isUp = false;
+    triangleInfo[genreIndex][genreVal].isUp = false;
   }
   //Add triangle up or down
   //Update the triangle array
