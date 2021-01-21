@@ -140,6 +140,8 @@ button {
     overflow: auto;
     background-color: rgb(0,0,0);
     background-color: rgba(0,0,0,0.4);
+
+    
 }
 
 /* MODAAL CONTENT + BOX */
@@ -155,7 +157,7 @@ button {
     -webkit-animation-name: animatetop;
     -webkit-animation-duration: 0.4s;
     animation-name: animatetop;
-    animation-duration: 0.4s
+    animation-duration: 0.4s;
 }
 
 @-webkit-keyframes animatetop {
@@ -200,17 +202,23 @@ button {
 .text-container {
     width: 57%;
     height: 57%;
-    margin-right: auto;
+    margin-right: 220px;
     margin-left: auto;
+    overflow: hidden;
+    border: 2px solid black;
+    
 }
 
 label {
     float: left;
+    position: absolute;
+    left: 260px;
 }
 
 input {
+    top:4px;
     position: relative;
-    left: 100px;
+    left: 80px;
     font-size: 20px;
 }
 

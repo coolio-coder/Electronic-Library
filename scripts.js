@@ -115,19 +115,19 @@ function addTriangleDown(genreVal) {
   document.getElementById(`${genreVal}_shelf`).appendChild(div);
 }
 
-var bookshelf = [];
-function addNewGenre (genre) {
-  const newGenre =  {
-    [genre]: {
-      genre: genre,
-      isUp: false
-    }
-  };
-  bookshelf.push(newGenre);
-}
-addNewGenre('Romance');
-addNewGenre('Action');
-addNewGenre('Adventure');
+// var bookshelf = [];
+// function addNewGenre (genre) {
+//   const newGenre =  {
+//     [genre]: {
+//       genre: genre,
+//       isUp: false
+//     }
+//   };
+//   bookshelf.push(newGenre);
+// }
+// addNewGenre('Romance');
+// addNewGenre('Action');
+// addNewGenre('Adventure');
 
 //Finds which index the target genre is located at
 function searchTriangleInfo (target, myArray) {
@@ -202,6 +202,8 @@ function addGenre (newGenre) {
   document.getElementById(`${newGenre}_Genre`).appendChild(p);
   document.getElementById(`${newGenre}_Genre`).appendChild(containerDiv);
   document.getElementById(`${newGenre}_title`).innerHTML = `${newGenre}`;
+  console.log(backgroundColor[newGenre])
+  document.getElementById(`${newGenre}_Genre`).style.backgroundImage = `url(${backgroundColor[newGenre]})`;
 }
 
 /*****
@@ -231,4 +233,14 @@ window.onclick = function(event) {
 
 function noScroll () {
   window.scrollTo(0,1200);
+}
+
+/********************************DICTIONARY OF COMMON GENRE AND COOL BACKGROUNDS *****************************/
+
+backgroundColor = {
+  Action: 'https://static.wikia.nocookie.net/matrix/images/d/df/Thematrixincode99.jpg/revision/latest/scale-to-width-down/340?cb=20140425045724',
+  Adventure: 'https://www.slrlounge.com/wp-content/uploads/2020/06/best-landscape-photographers-to-follow-in-2020-1200x675.jpg',
+  Horror: 'https://i.pinimg.com/originals/b1/5d/1b/b15d1b822a2654448b7dfc04962bd096.png',
+  Crime: 'https://149349728.v2.pressablecdn.com/wp-content/uploads/2019/03/1*rICHr5C8WAws-9B0IdytmQ.jpeg',
+  Fantasy: 'https://lh3.googleusercontent.com/proxy/tU81qKe8LfoDD_Tkq7bMVtJNZkY1vvVFnX3H3mBX5K4UJUwwhcY3U1Pwjn1S0MLw0fslJ_1J1Q34sFeb1auLowCTtCbsFozMXwZfskvgSDBf8YTWrLfCOQPHz3vPAw'
 }
