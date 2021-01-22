@@ -238,9 +238,12 @@ function noScroll () {
 /********************************DICTIONARY OF COMMON GENRE AND COOL BACKGROUNDS *****************************/
 
 backgroundColor = {
-  Action: 'https://static.wikia.nocookie.net/matrix/images/d/df/Thematrixincode99.jpg/revision/latest/scale-to-width-down/340?cb=20140425045724',
+  Action: 'https://i.vimeocdn.com/video/487821347_1280x720.jpg',
   Adventure: 'https://www.slrlounge.com/wp-content/uploads/2020/06/best-landscape-photographers-to-follow-in-2020-1200x675.jpg',
   Horror: 'https://i.pinimg.com/originals/b1/5d/1b/b15d1b822a2654448b7dfc04962bd096.png',
   Crime: 'https://149349728.v2.pressablecdn.com/wp-content/uploads/2019/03/1*rICHr5C8WAws-9B0IdytmQ.jpeg',
-  Fantasy: 'https://lh3.googleusercontent.com/proxy/tU81qKe8LfoDD_Tkq7bMVtJNZkY1vvVFnX3H3mBX5K4UJUwwhcY3U1Pwjn1S0MLw0fslJ_1J1Q34sFeb1auLowCTtCbsFozMXwZfskvgSDBf8YTWrLfCOQPHz3vPAw'
+  Fantasy: 'https://i.pinimg.com/originals/4c/55/c7/4c55c70c4b14371a9e3d483744849a50.jpg',
+  Mystery: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT16Fm1Gq8r9G0NutsxsPgLZmU0zSgnDHWDzg&usqp=CAU',
+  'Fairy Tale': 'https://www.stuckinthelibrary.org/uploads/2/7/4/1/27415253/published/693145-widescreen-fairy-tale-wallpaper-1920x1080-pictures.jpg?1550451276',
+  
 }
