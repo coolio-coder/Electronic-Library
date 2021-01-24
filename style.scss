@@ -37,7 +37,6 @@
 	margin: 0;
 	padding: 0;
 	font-family: 'nidus_sansregular';
-	overflow: auto;
 	box-sizing: inherit;
 	&:before {
 		box-sizing: inherit;
@@ -91,6 +90,39 @@ html {
 	background-size: cover;
 	min-height: 500px;
 }
+
+/*****************************FLEX BOX ANIMATION FOR BOOKSHELF BACKGROUND****************/
+#bookshelf {
+	overflow: hidden;
+	display: flex;
+	flex-direction: column;
+}
+
+// #bookshelf > div {
+// 	flex: 1;
+// 	border-right: 2px solid black;
+// 	height: 200px;
+// 	padding: 10px;
+// 	transition: 0.5s flex;
+// }
+
+// #bookshelf > div:hover {
+// 	flex: 3px;
+// }
+
+// @media screen and (max-width: 700px) {
+// 	#bookshelf {
+// 		flex-direction: row;
+// 		height: 100vh;
+// 	}
+
+// 	#bookshelf > div {
+// 		border-right: none;
+// 		border-bottom: 2px solid;
+// 	}
+// }
+
+
 .genre {
 	background-image: url(src/synthwave.png);
 	min-height: 600px;
@@ -103,13 +135,59 @@ html {
 	opacity: 1;
 	color: #ff2975;
 	font-size: 90px;
+
+	transition:
+	font-size 0.7s cubic-bezier(0.61,-0.19, 0.7,-0.11),
+		flex 0.7s cubic-bezier(0.61,-0.19, 0.7,-0.11),
+	background 0.2s;
+	background-size: cover;
+	flex: 1;
+	display: flex;
+	// flex-direction: column;
 }
-.genre-name {
-	display: inline-block;
-}
+
+//FLEX ITEMS//
+
+// .genre > * {
+// 	margin: 0;
+// 	width: 100%;
+// 	transition: transform 0.5s;
+// 	flex: 1 0 auto;
+// 	display: flex;
+// 	justify-content: center;
+// 	align-items: center;
+// }
+
+// .genre > *:first-child { transform: translateY(-100%); }
+// .genre.open-active > *:first-child { transform: translateY(0); }
+// .genre > *:last-child { transform: translateY(100%); }
+// .genre.open-active > *:last-child { transform: translateY(0); }
+
+// .genre p {
+// 	text-transform: uppercase;
+// 	text-shadow: 0 0 4px rgba(0, 0, 0, 0.72), 0 0 14px rgba(0, 0, 0, 0.45);
+// 	font-size: 2em;
+// }
+
+// .genre p:nth-child(2) {
+// 	font-size: 2em;
+//   }
+  
+//   @media only screen and (max-width: 300px) {
+// 	.genre p {
+// 	  font-size: 1em;
+// 	}
+//   }
+
+//Title
+// .genre-name {
+// 	display: inline-block;
+// }
+
+
+
 .triangle_container {
 	position: relative;
-	width: 100%;
 	left: 15px;
 	overflow-y: auto;
 	overflow-x: hidden;

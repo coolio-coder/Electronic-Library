@@ -180,7 +180,7 @@ function addTriangle (genreVal = 'unsorted') {
 
 var genreList = [];
 
-function addGenre (newGenre) {
+function addGenre (newGenre = 'unsorted') {
   genreList.push(newGenre);
   const div = document.createElement('div');
 
@@ -202,8 +202,9 @@ function addGenre (newGenre) {
   document.getElementById(`${newGenre}_Genre`).appendChild(p);
   document.getElementById(`${newGenre}_Genre`).appendChild(containerDiv);
   document.getElementById(`${newGenre}_title`).innerHTML = `${newGenre}`;
-  console.log(backgroundColor[newGenre])
+  if(!backgroundColor[newGenre] === undefined) {
   document.getElementById(`${newGenre}_Genre`).style.backgroundImage = `url(${backgroundColor[newGenre]})`;
+  } else {document.getElementById(`${newGenre}_Genre`).style.backgroundImage = `url(src/synthwave.png)`}
 }
 
 /*****
@@ -244,6 +245,24 @@ backgroundColor = {
   Crime: 'https://149349728.v2.pressablecdn.com/wp-content/uploads/2019/03/1*rICHr5C8WAws-9B0IdytmQ.jpeg',
   Fantasy: 'https://i.pinimg.com/originals/4c/55/c7/4c55c70c4b14371a9e3d483744849a50.jpg',
   Mystery: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT16Fm1Gq8r9G0NutsxsPgLZmU0zSgnDHWDzg&usqp=CAU',
-  'Fairy Tale': 'https://www.stuckinthelibrary.org/uploads/2/7/4/1/27415253/published/693145-widescreen-fairy-tale-wallpaper-1920x1080-pictures.jpg?1550451276',
-  
+  'Fairy Tale': 'https://www.stuckinthelibrary.org/uploads/2/7/4/1/27415253/published/693145-widescreen-fairy-tale-wallpaper-1920x1080-pictures.jpg?1550451276'
 }
+
+/********************************FLEX BOX CODE *****************************/
+
+// const panels = document.querySelectorAll('.genre');
+
+// function toggleOpen() {
+//   console.log('Hello');
+//   this.classList.toggle('open');
+// }
+
+// function toggleActive(e) {
+//   console.log(e.propertyName);
+//   if (e.propertyName.includes('flex')) {
+//     this.classList.toggle('open-active');
+//   }
+// }
+
+// panels.forEach(panel => panel.addEventListener('click', toggleOpen));
+// panels.forEach(panel => panel.addEventListener('transitionend', toggleActive));
