@@ -47,7 +47,7 @@ function changeSlider() {
   document.querySelector('.slider').style.backgroundColor = 'red';
 }
 
-// Add to Library //
+// Add to Library //    
 function getInputVal () {
   var titleVal = document.getElementById('title').value,
       authorVal = document.getElementById('author').value,
