@@ -93,40 +93,22 @@ html {
 
 /*****************************FLEX BOX ANIMATION FOR BOOKSHELF BACKGROUND****************/
 #bookshelf {
+	//False Background 
+	background-image: url('https://wallpaperaccess.com/full/1115096.jpg');
+	background-attachment: fixed;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+
 	overflow: hidden;
-	display: table;
-	width: 100%;
-	height: 100%;
+	width: 100%; height: 1600px;
+
+
 }
-
-// #bookshelf > div {
-// 	flex: 1;
-// 	border-right: 2px solid black;
-// 	height: 200px;
-// 	padding: 10px;
-// 	transition: 0.5s flex;
-// }
-
-// #bookshelf > div:hover {
-// 	flex: 3px;
-// }
-
-// @media screen and (max-width: 700px) {
-// 	#bookshelf {
-// 		flex-direction: row;
-// 		height: 100vh;
-// 	}
-
-// 	#bookshelf > div {
-// 		border-right: none;
-// 		border-bottom: 2px solid;
-// 	}
-// }
-
 
 .genre {
 	background-image: url(src/synthwave.png);
-	min-height: 600px;
+	min-height: 400px;
 	background-position: 50% 50%;
 	background-repeat: no-repeat;
 	background-size: cover;
@@ -136,10 +118,7 @@ html {
 	color: #ff2975;
 	font-size: 90px;
 
-	display: table-cell;
-	// -webkit-transition:width 500ms;
-	// -moz-transition:width 500ms;
-	transition:width 500ms;
+
 
 
 	// FIRST ATTEMPT TO MAKE FLEX CONTAINER
@@ -153,46 +132,15 @@ html {
 	// flex-direction: column;
 }
 
-#bookshelf:hover .genre {
-	height: 20%;
-}
-
-#bookshelf:hover .genre:hover {
-	height: 40%;
-}
-
-//FLEX ITEMS//
-
-// .genre > * {
-// 	margin: 0;
-// 	width: 100%;
-// 	transition: transform 0.5s;
-// 	flex: 1 0 auto;
-// 	display: flex;
-// 	justify-content: center;
-// 	align-items: center;
+// #bookshelf:hover .genre {
+// 	height: 10%;
 // }
 
-// .genre > *:first-child { transform: translateY(-100%); }
-// .genre.open-active > *:first-child { transform: translateY(0); }
-// .genre > *:last-child { transform: translateY(100%); }
-// .genre.open-active > *:last-child { transform: translateY(0); }
-
-// .genre p {
-// 	text-transform: uppercase;
-// 	text-shadow: 0 0 4px rgba(0, 0, 0, 0.72), 0 0 14px rgba(0, 0, 0, 0.45);
-// 	font-size: 2em;
+// #bookshelf:hover .genre:hover {
+// 	height: 45%;
 // }
 
-// .genre p:nth-child(2) {
-// 	font-size: 2em;
-//   }
-  
-//   @media only screen and (max-width: 300px) {
-// 	.genre p {
-// 	  font-size: 1em;
-// 	}
-//   }
+
 
 // Title
 .genre-name {
@@ -202,7 +150,9 @@ html {
 	transition:height 500ms;
 }
 
-
+.genre.active {
+	height: 45%;
+}
 
 .triangle_container {
 	position: relative;

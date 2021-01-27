@@ -201,10 +201,14 @@ function addGenre (newGenre = 'unsorted') {
 
   document.getElementById(`${newGenre}_Genre`).appendChild(p);
   document.getElementById(`${newGenre}_Genre`).appendChild(containerDiv);
-  document.getElementById(`${newGenre}_title`).innerHTML = `${newGenre}`;
-  if(!backgroundColor[newGenre] === undefined) {
+  document.getElementById(`${newGenre}_title`).innerHTML = `${newGenre}`
+  console.log(backgroundColor[newGenre])
+  if(backgroundColor.hasOwnProperty(newGenre) === true) {
+    console.log('hey')
+    console.log(backgroundColor[newGenre])
   document.getElementById(`${newGenre}_Genre`).style.backgroundImage = `url(${backgroundColor[newGenre]})`;
-  } else {document.getElementById(`${newGenre}_Genre`).style.backgroundImage = `url(src/synthwave.png)`}
+  } else if (backgroundColor.hasOwnProperty(newGenre) === 'unsorted') {}
+  else {document.getElementById(`${newGenre}_Genre`).style.backgroundImage = `url(src/synthwave.png)`}
 }
 
 /*****
@@ -250,19 +254,11 @@ backgroundColor = {
 
 /********************************FLEX BOX CODE *****************************/
 
-// const panels = document.querySelectorAll('.genre');
+var genreBox = $('div.genre');
 
-// function toggleOpen() {
-//   console.log('Hello');
-//   this.classList.toggle('open');
-// }
+function toggleAccordion() {
+  genreBox.removeClass('active');
+  $(this).addClass('active');
+}
 
-// function toggleActive(e) {
-//   console.log(e.propertyName);
-//   if (e.propertyName.includes('flex')) {
-//     this.classList.toggle('open-active');
-//   }
-// }
-
-// panels.forEach(panel => panel.addEventListener('click', toggleOpen));
-// panels.forEach(panel => panel.addEventListener('transitionend', toggleActive));
+genreBox.on('click', toggleAccordion)
