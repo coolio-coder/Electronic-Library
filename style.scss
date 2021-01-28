@@ -118,9 +118,6 @@ html {
 	color: #ff2975;
 	font-size: 90px;
 
-
-
-
 	// FIRST ATTEMPT TO MAKE FLEX CONTAINER
 	// transition:
 	// font-size 0.7s cubic-bezier(0.61,-0.19, 0.7,-0.11),
@@ -131,6 +128,14 @@ html {
 	// display: flex;
 	// flex-direction: column;
 }
+
+.genre.open {
+	height: 45%;
+	font-size: 40px;
+	transition:
+	cubic-bezier(0.61,-0.19, 0.7,-0.11),
+	background 0.2s;
+  }
 
 // #bookshelf:hover .genre {
 // 	height: 10%;
@@ -146,8 +151,6 @@ html {
 .genre-name {
 	display: table-cell;
 	height: 100%;
-	// width: 25%;
-	transition:height 500ms;
 }
 
 .genre.active {
@@ -190,6 +193,17 @@ button {
 	position: relative;
 	bottom: 20px;
 }
+
+.overlay {
+	position: fixed; /* Positioning and size */
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+	background-color: rgba(128,128,128,0.5); /* color */
+	display: none; /* making it hidden by default */
+}
+
 .modal {
 	display: none;
 	position: fixed;
@@ -199,7 +213,6 @@ button {
 	width: 100%;
 	height: 100%;
 	overflow: auto;
-	background-color: rgb(0,0,0);
 	background-color: rgba(0,0,0,0.4);
 }
 .modal-content {
@@ -249,7 +262,6 @@ button {
 	margin-right: 220px;
 	margin-left: auto;
 	overflow: hidden;
-	border: 2px solid black;
 }
 label {
 	float: left;

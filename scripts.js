@@ -209,6 +209,12 @@ function addGenre (newGenre = 'unsorted') {
   document.getElementById(`${newGenre}_Genre`).style.backgroundImage = `url(${backgroundColor[newGenre]})`;
   } else if (backgroundColor.hasOwnProperty(newGenre) === 'unsorted') {}
   else {document.getElementById(`${newGenre}_Genre`).style.backgroundImage = `url(src/synthwave.png)`}
+
+  //Add toggle flex background
+  // allGenre = document.querySelectorAll('.genre');
+
+  // allGenre.forEach(genre => genre.addEventListener('click', toggleOpen));
+  // allGenre.forEach(genre => genre.addEventListener('transitionend', toggleActive));
 }
 
 /*****
@@ -234,6 +240,9 @@ window.onclick = function(event) {
   }
 }
 
+//Prevent clicking the background
+
+
 //Prevent Scrolling when you open up your modal
 
 function noScroll () {
@@ -249,16 +258,40 @@ backgroundColor = {
   Crime: 'https://149349728.v2.pressablecdn.com/wp-content/uploads/2019/03/1*rICHr5C8WAws-9B0IdytmQ.jpeg',
   Fantasy: 'https://i.pinimg.com/originals/4c/55/c7/4c55c70c4b14371a9e3d483744849a50.jpg',
   Mystery: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT16Fm1Gq8r9G0NutsxsPgLZmU0zSgnDHWDzg&usqp=CAU',
-  'Fairy Tale': 'https://www.stuckinthelibrary.org/uploads/2/7/4/1/27415253/published/693145-widescreen-fairy-tale-wallpaper-1920x1080-pictures.jpg?1550451276'
+  'Fairy Tale': 'https://www.stuckinthelibrary.org/uploads/2/7/4/1/27415253/published/693145-widescreen-fairy-tale-wallpaper-1920x1080-pictures.jpg?1550451276',
+  Comedy: 'http://hd.wallpaperswide.com/thumbs/funny-t2.jpg',
+  Philosophical: 'https://imageproxy.themaven.net//https%3A%2F%2Fwww.history.com%2F.image%2FMTU3ODc5MDg2NDMzNTEwNzI5%2Fdeath-of-socrates.jpg',
+  'Science Fiction': 'https://wallpaperaccess.com/full/158905.jpg',
+  Western: 'https://www.wallpapertip.com/wmimgs/52-522788_cowboy-background-images-cowboy-background-sm-western-theme.jpg',
+  Urban: 'https://i.ytimg.com/vi/HIaPhJSmgrw/hqdefault.jpg'
 }
 
 /********************************FLEX BOX CODE *****************************/
 
-var genreBox = $('div.genre');
+// `var genreBox = $('div.genre');`
 
-function toggleAccordion() {
-  genreBox.removeClass('active');
-  $(this).addClass('active');
-}
+// const allGenre = document.querySelectorAll('.genre');
 
-genreBox.on('click', toggleAccordion)
+// function toggleOpen () {
+//   console.log('hello');
+//   this.classList.toggle('open');
+// }
+
+// function toggleActive(e) {
+//   console.log(e.propertyName);
+//   // if (e.propertyName.includes('flex')) {
+//   //   this.classList.toggle('open-active');
+//   // }
+// }
+
+// allGenre.forEach(genre => genre.addEventListener('click', toggleOpen));
+// allGenre.forEach(genre => genre.addEventListener('transitionend', toggleActive));
+
+
+// function toggleAccordion() {
+//   genreBox.removeClass('active');
+//   $(this).addClass('active');
+// }
+
+// genreBox.on('click', toggleAccordion)
+
