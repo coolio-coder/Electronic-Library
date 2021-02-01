@@ -26,13 +26,7 @@
 		opacity: 1;
 	}
 }
-/* THE CLOSE BUTTON */
-/*MODAL CONFIG*/
-/*TOGGLE BUTTON FOR READ*/
-/* The switch - the box around the slider */
-/* Hide default HTML checkbox */
-/* The slider */
-/* Rounded sliders */
+
 * {
 	margin: 0;
 	padding: 0;
@@ -133,19 +127,9 @@ html {
 	height: 45%;
 	font-size: 40px;
 	transition:
-	cubic-bezier(0.61,-0.19, 0.7,-0.11),
-	background 0.2s;
+	cubic-bezier(0.82, 0.13, 0.27, 1.04),
+	background 10s;
   }
-
-// #bookshelf:hover .genre {
-// 	height: 10%;
-// }
-
-// #bookshelf:hover .genre:hover {
-// 	height: 45%;
-// }
-
-
 
 // Title
 .genre-name {
@@ -192,6 +176,11 @@ button {
 	outline: none;
 	position: relative;
 	bottom: 20px;
+}
+
+#openModal {
+	position: relative;
+	bottom: 0px;
 }
 
 .overlay {
@@ -316,6 +305,20 @@ input {
 		}
 	}
 }
+
+.card {
+	cursor: pointer;
+    min-width:700px;
+    margin-bottom:10px;
+    perspective:600px;
+    transition:all 0.1s;
+}
+
+.genre.card {
+	transition: cubic-bezier(0.075, 0.82, 0.165, 1), 0.5s;
+}
+
+
 sup {
 	color: white;
 }

@@ -189,6 +189,7 @@ function addGenre (newGenre = 'unsorted') {
 
   //Create new genre div, 1) genre title & 2) triangle container for book covers and id for book covers
   div.className = 'genre';
+
   div.id = `${newGenre}_Genre`;
 
   p.className = 'genre-name';
@@ -197,9 +198,12 @@ function addGenre (newGenre = 'unsorted') {
   containerDiv.id = `${newGenre}_shelf`;
 
   //Add new items to the main body
+  
   document.getElementById('bookshelf').appendChild(div);
 
   document.getElementById(`${newGenre}_Genre`).appendChild(p);
+  document.getElementById(`${newGenre}_Genre`).classList.add('card');
+  document.getElementById(`${newGenre}_Genre`).classList.add('flex-row');
   document.getElementById(`${newGenre}_Genre`).appendChild(containerDiv);
   document.getElementById(`${newGenre}_title`).innerHTML = `${newGenre}`
   console.log(backgroundColor[newGenre])
@@ -210,11 +214,8 @@ function addGenre (newGenre = 'unsorted') {
   } else if (backgroundColor.hasOwnProperty(newGenre) === 'unsorted') {}
   else {document.getElementById(`${newGenre}_Genre`).style.backgroundImage = `url(src/synthwave.png)`}
 
-  //Add toggle flex background
-  // allGenre = document.querySelectorAll('.genre');
-
-  // allGenre.forEach(genre => genre.addEventListener('click', toggleOpen));
-  // allGenre.forEach(genre => genre.addEventListener('transitionend', toggleActive));
+  old = $('.card').get(0);
+  $('.card').click(toggleFlex)
 }
 
 /*****
@@ -268,30 +269,13 @@ backgroundColor = {
 
 /********************************FLEX BOX CODE *****************************/
 
-// `var genreBox = $('div.genre');`
+let old = $('.card').get(0);
+$('.card').click(toggleFlex)
 
-// const allGenre = document.querySelectorAll('.genre');
-
-// function toggleOpen () {
-//   console.log('hello');
-//   this.classList.toggle('open');
-// }
-
-// function toggleActive(e) {
-//   console.log(e.propertyName);
-//   // if (e.propertyName.includes('flex')) {
-//   //   this.classList.toggle('open-active');
-//   // }
-// }
-
-// allGenre.forEach(genre => genre.addEventListener('click', toggleOpen));
-// allGenre.forEach(genre => genre.addEventListener('transitionend', toggleActive));
-
-
-// function toggleAccordion() {
-//   genreBox.removeClass('active');
-//   $(this).addClass('active');
-// }
-
-// genreBox.on('click', toggleAccordion)
-
+function toggleFlex () {
+  console.log(this);
+  if(old !=null && $(old).hasClass('open'))
+    $(old).toggleClass('open');
+    $(this).toggleClass('open');
+    old = this;
+}

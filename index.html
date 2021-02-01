@@ -18,15 +18,14 @@
     
     <!--BOOKSHELF-->
     <div id='bookshelf'>
-        <div class='genre'> 
+        <div class='genre card flex-row'> 
             <!-- Title of genre and the button to add a book -->
                 <p class ='genre-name'>Unsorted Books
                 <button type='button' id='openModal' onclick='openModal()'>Add Book</button>
                 </p>
                 
                 <div id='myModal' class='modal'>
-                
-                <div class='modal-content'>
+                    <div class='modal-content'>
                     <div class="modal-header">    
                         <span class='close'>&times;</span>
                         <p>Welcome</p>
@@ -65,7 +64,7 @@
                                 <button type="button" id='submit' onclick="getInputVal();">Submit</button><br>
                             </div>
                     </div>
-                </div>
+                    </div>
                 </div>
             <!-- //Container to keep all the book frames -->
                 <div class='triangle_container' id='unsorted_shelf'>
