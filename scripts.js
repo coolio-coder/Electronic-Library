@@ -201,11 +201,18 @@ function addGenre (newGenre = 'unsorted') {
   
   document.getElementById('bookshelf').appendChild(div);
 
+  //For the genre row
   document.getElementById(`${newGenre}_Genre`).appendChild(p);
   document.getElementById(`${newGenre}_Genre`).classList.add('card');
   document.getElementById(`${newGenre}_Genre`).classList.add('flex-row');
+  document.getElementById(`${newGenre}_Genre`).classList.add('open');
+  //For the container for the books within the genre row
   document.getElementById(`${newGenre}_Genre`).appendChild(containerDiv);
+  document.getElementById(`${newGenre}_shelf`).classList.add('hidden');
+  document.getElementById(`${newGenre}_shelf`).classList.add('bottom');
   document.getElementById(`${newGenre}_title`).innerHTML = `${newGenre}`
+
+
   console.log(backgroundColor[newGenre])
   if(backgroundColor.hasOwnProperty(newGenre) === true) {
     console.log('hey')
@@ -214,6 +221,7 @@ function addGenre (newGenre = 'unsorted') {
   } else if (backgroundColor.hasOwnProperty(newGenre) === 'unsorted') {}
   else {document.getElementById(`${newGenre}_Genre`).style.backgroundImage = `url(src/synthwave.png)`}
 
+  //to add clickability to the new genre row
   old = $('.card').get(0);
   $('.card').click(toggleFlex)
 }

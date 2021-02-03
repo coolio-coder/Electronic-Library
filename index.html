@@ -18,12 +18,11 @@
     
     <!--BOOKSHELF-->
     <div id='bookshelf'>
-        <div class='genre card flex-row'> 
+        <div class='genre card flex-row open'> 
             <!-- Title of genre and the button to add a book -->
                 <p class ='genre-name'>Unsorted Books
                 <button type='button' id='openModal' onclick='openModal()'>Add Book</button>
                 </p>
-                
                 <div id='myModal' class='modal'>
                     <div class='modal-content'>
                     <div class="modal-header">    
@@ -66,8 +65,12 @@
                     </div>
                     </div>
                 </div>
+
+                
+
             <!-- //Container to keep all the book frames -->
-                <div class='triangle_container' id='unsorted_shelf'>
+                <div class='triangle_container hidden bottom' id='unsorted_shelf'>
+                    <img src='https://images-na.ssl-images-amazon.com/images/I/51DF6ZR8G7L._SX329_BO1,204,203,200_.jpg' class='book'>
                 </div>
         </div>
     </div>
