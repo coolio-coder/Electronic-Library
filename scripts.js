@@ -1,10 +1,10 @@
 var myLibrary = [];
 
-// const book1 = new Books('Harry Potter', 'Jk Rowling', 636, 'adventure', 'read');
-// const book2 = new Books('A Song of Ice and Fire', 'George R. R. Martin', 694, 'adventure' ,'not read');
-// const book3 = new Books('Eragon', 'Christopher Paolini', 509, 'adventure' ,'read');
+const book1 = new Book('Harry Potter', 'Jk Rowling', 636, 'adventure', 'read');
+const book2 = new Book('A Song of Ice and Fire', 'George R. R. Martin', 694, 'adventure' ,'not read');
+const book3 = new Book('Eragon', 'Christopher Paolini', 509, 'adventure' ,'read');
 
-function Books (title, author, page, genre, read) {
+function Book (title, author, page, genre, read) {
   this.title = title;
   this.author = author;
   this.page = page;
@@ -12,10 +12,10 @@ function Books (title, author, page, genre, read) {
   this.read = read;
 
   //This method will add a book to the library
-  this.addToLibrary = function () {
-    myLibrary.push(this)
-    console.log(myLibrary);
-  }
+  // this.addToLibrary = function () {
+  //   myLibrary.push(this)
+  //   console.log(myLibrary);
+  // }
 
   //This method will remove a book based on the location of the book
   this.removeBook = function () {
@@ -27,6 +27,12 @@ function Books (title, author, page, genre, read) {
     console.log( `I have ${readState[0].haveRead} ${titleVal}, which is written by ${authorVal}. It has ${pageVal} pages and is considered a ${genreVal} book`);
   }
 }
+
+Book.prototype.addToLibrary1 = function () {
+  myLibrary.push(this)
+  console.log(myLibrary);
+}
+
 
 const capitalize = str => {
   if(str !== '') {
