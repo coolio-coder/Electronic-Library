@@ -66,19 +66,16 @@ function getInputVal () {
     myLibrary.push(new Books(titleVal, authorVal, pageVal, genreVal, readState[0]))
     //Based on the genre that user inputs, this conditional will decide where to put the book
     if(genreList.includes(genreVal)) {
-      console.log('waht')
       addTriangle(genreVal);
+    } else if (genreVal === '') {
+      console.log('unsorted');
+      addTriangle('unsorted')
     } else if (!genreList.includes(genreVal) || genreVal !== '') {
       console.log(genreVal)
       addGenre(genreVal);
       addTriangle(genreVal);
-    } else {
-      addTriangle('unsorted')
     }
   }
-  console.log(genreVal)
-  console.log(titleVal)
-  console.log(genreVal)
 
   //Close modal
   modal.style.display = "none";
@@ -151,10 +148,13 @@ function addTriangle (genreVal = 'unsorted') {
     };
     triangleInfo.push(newGenre);
   }
+  console.log('hello')
   //updates triangleInfo if a new genre is pushed onto the array
   genreIndex = searchTriangleInfo(genreVal, triangleInfo);
   //Use triangle array to detect the triangle position
   if (triangleInfo[genreIndex][genreVal].isUp === false) {
+    console.log('it works!')
+    console.log(genreVal)
     addTriangleUp(genreVal);
     //Set the position of the triangle to be true then push onto the array
     triangleInfo[genreIndex][genreVal].isUp = true;
@@ -178,7 +178,7 @@ function addTriangle (genreVal = 'unsorted') {
 
 //Add Genre (Genre div, genre name, bookframe)
 
-var genreList = [];
+var genreList = ['Unsorted'];
 
 function addGenre (newGenre = 'unsorted') {
   genreList.push(newGenre);
@@ -204,12 +204,10 @@ function addGenre (newGenre = 'unsorted') {
   //For the genre row
   document.getElementById(`${newGenre}_Genre`).appendChild(p);
   document.getElementById(`${newGenre}_Genre`).classList.add('card');
-  document.getElementById(`${newGenre}_Genre`).classList.add('flex-row');
   document.getElementById(`${newGenre}_Genre`).classList.add('open');
   //For the container for the books within the genre row
   document.getElementById(`${newGenre}_Genre`).appendChild(containerDiv);
   document.getElementById(`${newGenre}_shelf`).classList.add('hidden');
-  document.getElementById(`${newGenre}_shelf`).classList.add('bottom');
   document.getElementById(`${newGenre}_title`).innerHTML = `${newGenre}`
 
 
@@ -281,7 +279,6 @@ let old = $('.card').get(0);
 $('.card').click(toggleFlex)
 
 function toggleFlex () {
-  console.log(this);
   if(old !=null && $(old).hasClass('open'))
     $(old).toggleClass('open');
     $(this).toggleClass('open');

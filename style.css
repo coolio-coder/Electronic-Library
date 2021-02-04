@@ -54,7 +54,7 @@ html {
   color: white;
 }
 
-.title {
+.mainTitle {
   text-align: center;
   position: relative;
   opacity: 0.9;
@@ -102,15 +102,9 @@ html {
   height: 1600px;
 }
 
-.flex-row {
-  display: flex;
-  flex-flow: row;
-  align-items: center;
-}
-
 .genre {
   background-image: url(src/synthwave.png);
-  min-height: 200px;
+  min-height: 112px;
   background-position: 50% 50%;
   background-repeat: no-repeat;
   background-size: cover;
@@ -120,17 +114,10 @@ html {
   color: #ff2975;
   font-size: 90px;
 }
-.genre .hidden {
-  height: 0px;
-  overflow: hidden;
-  width: 200px;
-  font-size: 12px;
-  color: #777;
-  font-weight: normal;
-}
 .genre.open {
-  padding: 30px;
-  height: auto;
+  height: 35%;
+  font-size: 60px;
+  transition: cubic-bezier(0.82, 0.13, 0.27, 1.04), background 10s;
 }
 .genre.open .bottom {
   margin-top: 10px;
@@ -138,59 +125,81 @@ html {
   overflow: visible;
 }
 .genre.open .book {
-  transform: rotateY(30deg);
-  box-shadow: -10px 5px 5px 5px rgba(255, 255, 255, 0.2), -2px 0px 0px 0px #888;
+  transform: rotateY(40deg);
+  box-shadow: -10px 10px 10px 10px rgba(255, 255, 255, 0.2), -2px 0px 0px 0px #888;
   transition: all 0.5s;
   transition-delay: cubic-bezier(0.82, 0.13, 0.27, 1.04), background 2s;
 }
+.genre.open .hidden {
+  height: 100%;
+  overflow: hidden;
+  width: 100%;
+  font-size: 12px;
+  color: #777;
+  font-weight: normal;
+}
 .genre .book {
-  transition: all 0.5s;
   width: 200px;
   box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.3);
   overflow: hidden;
-}
-
-.genre.open {
-  height: 45%;
-  font-size: 40px;
-  transition: cubic-bezier(0.82, 0.13, 0.27, 1.04), background 10s;
-}
-
-.genre-name {
-  display: table-cell;
-  height: 100%;
-}
-
-.genre.active {
-  height: 45%;
-}
-
-.triangle_container {
+  border: 2px solid red;
   position: relative;
   left: 15px;
   overflow-y: auto;
   overflow-x: hidden;
 }
+.genre.card {
+  transition: cubic-bezier(0.075, 0.82, 0.165, 1), 0.5s;
+}
+.genre .hidden {
+  height: 0px;
+  overflow: hidden;
+  width: 100%;
+  font-size: 12px;
+  color: #777;
+  font-weight: normal;
+}
 
-.triangle {
-  width: 0;
-  height: 0;
-  opacity: 0.6;
-  margin: 20px 0px;
+.genre-name {
+  display: block;
+  height: 70px;
+  width: 100%;
+}
+
+.book_container {
+  display: block;
   position: relative;
+  left: 15px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  border: 2px solid red;
+  padding: 20px;
+}
+.book_container.hidden {
+  position: relative;
+  top: 10px;
+}
+
+.book {
+  width: 50px;
+  height: 200px;
+  padding: 20px;
+  margin: 10px 0px;
   float: left;
+  border: 2px solid red;
+  background: white;
+  color: black;
+  font-size: 18px;
+  text-align: center;
 }
 
-.up {
-  border-left: 120px solid transparent;
-  border-right: 120px solid transparent;
-  border-bottom: 170px solid #c200db;
-}
-
-.down {
-  border-left: 120px solid transparent;
-  border-right: 120px solid transparent;
-  border-top: 170px solid #c200db;
+.triangle_container {
+  display: block;
+  position: relative;
+  left: 15px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  border: 2px solid red;
 }
 
 button {
@@ -335,18 +344,6 @@ input:focus + .slider {
 }
 #submit:hover::after {
   opacity: 1;
-}
-
-.card {
-  cursor: pointer;
-  min-width: 700px;
-  margin-bottom: 10px;
-  perspective: 600px;
-  transition: all 0.1s;
-}
-
-.genre.card {
-  transition: cubic-bezier(0.075, 0.82, 0.165, 1), 0.5s;
 }
 
 sup {
