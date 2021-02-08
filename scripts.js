@@ -1,31 +1,27 @@
 var myLibrary = [];
 
-// const book1 = new Books('Harry Potter', 'Jk Rowling', 636, 'adventure', 'read');
-// const book2 = new Books('A Song of Ice and Fire', 'George R. R. Martin', 694, 'adventure' ,'not read');
-// const book3 = new Books('Eragon', 'Christopher Paolini', 509, 'adventure' ,'read');
+const book1 = new Book('Harry Potter', 'Jk Rowling', 636, 'adventure', 'read');
+// const book2 = new Book('A Song of Ice and Fire', 'George R. R. Martin', 694, 'adventure' ,'not read');
+// const book3 = new Book('Eragon', 'Christopher Paolini', 509, 'adventure' ,'read');
 
-function Books (title, author, page, genre, read) {
+function Book (title, author, page, genre, read) {
   this.title = title;
   this.author = author;
   this.page = page;
   this.genre = genre;
   this.read = read;
+}
 
-  //This method will add a book to the library
-  this.addToLibrary = function () {
-    myLibrary.push(this)
-    console.log(myLibrary);
-  }
-
-  //This method will remove a book based on the location of the book
-  this.removeBook = function () {
-    myLibrary.splice((myLibrary.indexOf(this)),1)
-    console.log(myLibrary);
-  }
-
-  this.aboutBook = function () {
-    console.log( `I have ${readState[0].haveRead} ${titleVal}, which is written by ${authorVal}. It has ${pageVal} pages and is considered a ${genreVal} book`);
-  }
+Book.prototype.addToLibrary = function () {
+  myLibrary.push(this)
+  console.log(myLibrary);
+}
+Book.prototype.removeBook = function () {
+  myLibrary.splice((myLibrary.indexOf(this)),1)
+  console.log(myLibrary);
+}
+Book.prototype.aboutBook = function () {
+  console.log( `I have ${readState[0].haveRead} ${titleVal}, which is written by ${authorVal}. It has ${pageVal} pages and is considered a ${genreVal} book`);
 }
 
 const capitalize = str => {
@@ -36,6 +32,7 @@ const capitalize = str => {
     } else {return str[0]}
   } return '';
 }
+
 
 /********************************************ADD BOOK BUTTON***********************************/
 
@@ -48,7 +45,7 @@ function changeSlider() {
 }
 
 // Add to Library //    
-function getInputVal () {
+function submitBook () {
   var titleVal = document.getElementById('title').value,
       authorVal = document.getElementById('author').value,
       pageVal = document.getElementById('page').value
@@ -63,17 +60,18 @@ function getInputVal () {
     authorVal = capitalize(authorVal);
     genreVal = capitalize(genreVal);
     //Add the book to the library
-    myLibrary.push(new Books(titleVal, authorVal, pageVal, genreVal, readState[0]))
+    myLibrary.push(new Book(titleVal, authorVal, pageVal, genreVal, readState[0]))
     //Based on the genre that user inputs, this conditional will decide where to put the book
     if(genreList.includes(genreVal)) {
-      addTriangle(genreVal);
+      myLibrary[myLibrary.length - 1].appendBook()
+      // addTriangle(genreVal);
     } else if (genreVal === '') {
-      console.log('unsorted');
-      addTriangle('unsorted')
+      myLibrary[myLibrary.length - 1].appendBook()
+      // addTriangle('unsorted')
     } else if (!genreList.includes(genreVal) || genreVal !== '') {
       console.log(genreVal)
       addGenre(genreVal);
-      addTriangle(genreVal);
+      myLibrary[myLibrary.length - 1].appendBook()
     }
   }
 
@@ -96,35 +94,57 @@ function haveReadState () {
   return (readState[0] === 'not read') ? readState[0] = 'read' : readState[0] = 'not read';
 }
 
-
 // Add Book frame
-var triangleInfo = []
 
-function addTriangleUp(genreVal) {
+Book.prototype.appendBook = function (genre='unsorted') {
+  //Add Book Class
   const div = document.createElement('div');
-  div.className = 'triangle up';
-  console.log(document.getElementById(`${genreVal}_shelf`))
-  document.getElementById(`${genreVal}_shelf`).appendChild(div);
-}
-function addTriangleDown(genreVal) {
-  const div = document.createElement('div');
-  div.className = 'triangle down';
-  document.getElementById(`${genreVal}_shelf`).appendChild(div);
+  const pTitle = document.createElement('p');
+  const pAuthor = document.createElement('p');
+  const pPages = document.createElement('p');
+  const linebreak = document.createElement('br');
+
+  //Create a book element for each book submitted
+  div.className = 'book';
+  div.id = `${this.title}_book`;
+  if(this.genre = ' ') {
+    document.getElementById(`unsorted_shelf`).appendChild(div);
+  } else {
+    document.getElementById(`${this.genre}_shelf`).appendChild(div);
+  }
+  
+
+  //Append each info to the book cover 
+  pTitle.className = 'title';
+  pTitle.id = this.title;
+  console.log(pTitle)
+  pAuthor.className = 'author';
+  pAuthor.id = `${this.title}_${this.author}`;
+  pPages.className = 'pages';
+  pPages.id = `${this.title}_${this.author}_${this.page}`;
+
+  document.getElementById(`${this.title}_book`).appendChild(pTitle);
+  document.getElementById(`${this.title}`).innerHTML = `${this.title}`;
+
+  document.getElementById(`${this.title}_book`).appendChild(linebreak);
+
+  document.getElementById(`${this.title}_book`).appendChild(pAuthor);
+  document.getElementById(`${this.title}_${this.author}`).innerHTML = `By ${this.author}`;
+  document.getElementById(`${this.title}_book`).appendChild(pPages);
+  document.getElementById(`${this.title}_${this.author}_${this.page}`).innerHTML = `${this.page} pages`;
 }
 
-// var bookshelf = [];
-// function addNewGenre (genre) {
-//   const newGenre =  {
-//     [genre]: {
-//       genre: genre,
-//       isUp: false
-//     }
-//   };
-//   bookshelf.push(newGenre);
+// function addTriangleUp(genreVal) {
+//   const div = document.createElement('div');
+//   div.className = 'triangle up';
+//   console.log(document.getElementById(`${genreVal}_shelf`))
+//   document.getElementById(`${genreVal}_shelf`).appendChild(div);
 // }
-// addNewGenre('Romance');
-// addNewGenre('Action');
-// addNewGenre('Adventure');
+// function addTriangleDown(genreVal) {
+//   const div = document.createElement('div');
+//   div.className = 'triangle down';
+//   document.getElementById(`${genreVal}_shelf`).appendChild(div);
+// }
 
 //Finds which index the target genre is located at
 function searchTriangleInfo (target, myArray) {
@@ -136,36 +156,36 @@ function searchTriangleInfo (target, myArray) {
   return -1;
 }
 
-function addTriangle (genreVal = 'unsorted') {
-  let genreIndex = searchTriangleInfo(genreVal, triangleInfo);
-  //Test if triangle info array does not contain the genre, then we create a new obj in the array
-  if (genreIndex === -1) {
-    const newGenre =  {
-      [genreVal]: {
-        genre: genreVal,
-        isUp: false
-      }
-    };
-    triangleInfo.push(newGenre);
-  }
-  console.log('hello')
-  //updates triangleInfo if a new genre is pushed onto the array
-  genreIndex = searchTriangleInfo(genreVal, triangleInfo);
-  //Use triangle array to detect the triangle position
-  if (triangleInfo[genreIndex][genreVal].isUp === false) {
-    console.log('it works!')
-    console.log(genreVal)
-    addTriangleUp(genreVal);
-    //Set the position of the triangle to be true then push onto the array
-    triangleInfo[genreIndex][genreVal].isUp = true;
-  } else {
-    addTriangleDown(genreVal);
-    //Set the position of the triangle to be false
-    triangleInfo[genreIndex][genreVal].isUp = false;
-  }
-  //Add triangle up or down
-  //Update the triangle array
-}
+// function addTriangle (genreVal = 'unsorted') {
+//   let genreIndex = searchTriangleInfo(genreVal, triangleInfo);
+//   //Test if triangle info array does not contain the genre, then we create a new obj in the array
+//   if (genreIndex === -1) {
+//     const newGenre =  {
+//       [genreVal]: {
+//         genre: genreVal,
+//         isUp: false
+//       }
+//     };
+//     triangleInfo.push(newGenre);
+//   }
+//   console.log('hello')
+//   //updates triangleInfo if a new genre is pushed onto the array
+//   genreIndex = searchTriangleInfo(genreVal, triangleInfo);
+//   //Use triangle array to detect the triangle position
+//   if (triangleInfo[genreIndex][genreVal].isUp === false) {
+//     console.log('it works!')
+//     console.log(genreVal)
+//     addTriangleUp(genreVal);
+//     //Set the position of the triangle to be true then push onto the array
+//     triangleInfo[genreIndex][genreVal].isUp = true;
+//   } else {
+//     addTriangleDown(genreVal);
+//     //Set the position of the triangle to be false
+//     triangleInfo[genreIndex][genreVal].isUp = false;
+//   }
+//   //Add triangle up or down
+//   //Update the triangle array
+// }
 
 //Add Bookcover
 

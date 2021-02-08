@@ -111,7 +111,6 @@ html {
 	color: #ff2975;
 	font-size: 90px;
 	&.open {
-		height: 35%;
 		font-size: 60px;
 		transition:
 		cubic-bezier(0.82, 0.13, 0.27, 1.04),
@@ -139,8 +138,9 @@ html {
 		}
 	}
 	& .book {
-		width: 200px;
-		box-shadow: 0px 2px 10px rgb(0 0 0 / 30%);
+		width: 310px;
+		height: 300px;
+		box-shadow: 0px 2px 10px rgb(255 255 255 / 30%);
 		overflow: hidden;
 		border: 2px solid red;
 		position: relative;
@@ -173,8 +173,6 @@ html {
 	left: 15px;
 	overflow-y: auto;
 	overflow-x: hidden;
-	border: 2px solid red;
-
 	padding: 20px;
 	&.hidden {
 		position: relative;
@@ -183,16 +181,18 @@ html {
 }
 
 .book {
-	width: 50px;
-	height: 200px;
+	width: 100px;
+	height: 300px;
 	padding: 20px;
 	margin: 10px 0px;
 	float: left;
-	border: 2px solid red;
 	background: white;
 	color: black;
-	font-size: 18px;
+	font-size: 30px;
 	text-align: center;
+	& .title {
+		font-size: 40px;
+	}
 }
 
 .triangle_container {
@@ -201,7 +201,6 @@ html {
 	left: 15px;
 	overflow-y: auto;
 	overflow-x: hidden;
-	border: 2px solid red;
 }
 // .triangle {
 // 	width: 0;
