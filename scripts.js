@@ -1,41 +1,3 @@
-//Search images online
-
-var keyword = "mountain";
-
-$(document).ready(function(){
-
-    $.getJSON("http://api.flickr.com/services/feeds/photos_public.gne?jsoncallback=?",
-    {
-        tags: keyword,
-        tagmode: "any",
-        format: "json"
-    },
-    function(data) {
-        var rnd = Math.floor(Math.random() * data.items.length);
-
-        var image_src = data.items[rnd]['media']['m'].replace("_m", "_b");
-
-        $('body').css('background-image', "url('" + image_src + "')");
-
-    });
-
-});
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 var myLibrary = [];
 const book1 = new Book('Harry Potter', 'Jk Rowling', 636, 'adventure', 'read');
 // const book2 = new Book('A Song of Ice and Fire', 'George R. R. Martin', 694, 'adventure' ,'not read');
@@ -73,14 +35,21 @@ const capitalize = str => {
 
 /********************************************ADD BOOK BUTTON***********************************/
 
+//Used to test whether a title or author exists already
 function findMatchingName(target, myArray) {
-  console.log('hello')
   for (var i=0; i<myArray.length;i++) {
     console.log(myLibrary[i].title)
     if(myLibrary[i].title.toLowerCase() === target.toLowerCase()) {
       return true;
     }
   }
+}
+
+//Color palatte
+var color = ['#ff2975', '#ffd319', '#ff901f', '	#f222ff', '	#8c1eff'];
+function randomColor() {
+  let randomNum = Math.round(Math.random()*5);
+  return color[randomNum];
 }
 
 
@@ -149,6 +118,15 @@ function resetToggle () {
   }
 }
 
+//remove book function
+function removeBook(element) {
+  console.log(element.parentNode.id)
+  let parent = document.getElementById(element.parentNode.id);
+  while (parent.firstChild) {
+    element.removeChild(element.lastChild);
+  }
+}
+
 // Add Book frame
 Book.prototype.appendBook = function (genre='unsorted') {
   //Add Book Class
@@ -186,6 +164,8 @@ Book.prototype.appendBook = function (genre='unsorted') {
   document.getElementById(`${this.title}_${this.author}`).innerHTML = `By ${this.author}`;
   document.getElementById(`${this.title}_book`).appendChild(pPages);
   document.getElementById(`${this.title}_${this.author}_${this.page}`).innerHTML = `${this.page} pages`;
+
+  document.getElementById(`${this.title}_book`).style.backgroundColor = randomColor();
 }
 
 //Finds which index the target genre is located at
@@ -220,7 +200,6 @@ function addGenre (newGenre = 'unsorted') {
   containerDiv.id = `${newGenre}_shelf`;
 
   //Add new items to the main body
-  
   document.getElementById('bookshelf').appendChild(div);
 
   //For the genre row
