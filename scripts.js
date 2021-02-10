@@ -1,5 +1,42 @@
-var myLibrary = [];
+//Search images online
 
+var keyword = "mountain";
+
+$(document).ready(function(){
+
+    $.getJSON("http://api.flickr.com/services/feeds/photos_public.gne?jsoncallback=?",
+    {
+        tags: keyword,
+        tagmode: "any",
+        format: "json"
+    },
+    function(data) {
+        var rnd = Math.floor(Math.random() * data.items.length);
+
+        var image_src = data.items[rnd]['media']['m'].replace("_m", "_b");
+
+        $('body').css('background-image', "url('" + image_src + "')");
+
+    });
+
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var myLibrary = [];
 const book1 = new Book('Harry Potter', 'Jk Rowling', 636, 'adventure', 'read');
 // const book2 = new Book('A Song of Ice and Fire', 'George R. R. Martin', 694, 'adventure' ,'not read');
 // const book3 = new Book('Eragon', 'Christopher Paolini', 509, 'adventure' ,'read');
@@ -36,6 +73,17 @@ const capitalize = str => {
 
 /********************************************ADD BOOK BUTTON***********************************/
 
+function findMatchingName(target, myArray) {
+  console.log('hello')
+  for (var i=0; i<myArray.length;i++) {
+    console.log(myLibrary[i].title)
+    if(myLibrary[i].title.toLowerCase() === target.toLowerCase()) {
+      return true;
+    }
+  }
+}
+
+
 //Reset the Slider
 function changeSlider() {
   document.querySelector('.slider').style.transform = 'translateX(26px)';
@@ -54,7 +102,9 @@ function submitBook () {
   //Capitalize all strings
   console.log(genreVal)
   if(titleVal, authorVal, pageVal === '') {
-    alert('Please fill out the required information.')
+    alert('Please fill out the required information.');
+  } else if (findMatchingName(titleVal,myLibrary) === true) {
+    alert("You've entered this book already. Please enter another book!");
   } else {
     titleVal = capitalize(titleVal);
     authorVal = capitalize(authorVal);
@@ -64,12 +114,9 @@ function submitBook () {
     //Based on the genre that user inputs, this conditional will decide where to put the book
     if(genreList.includes(genreVal)) {
       myLibrary[myLibrary.length - 1].appendBook()
-      // addTriangle(genreVal);
     } else if (genreVal === '') {
       myLibrary[myLibrary.length - 1].appendBook()
-      // addTriangle('unsorted')
     } else if (!genreList.includes(genreVal) || genreVal !== '') {
-      console.log(genreVal)
       addGenre(genreVal);
       myLibrary[myLibrary.length - 1].appendBook()
     }
@@ -83,8 +130,9 @@ function submitBook () {
   document.getElementById('author').value = '';
   document.getElementById('page').value = '';
   document.getElementById('Genre').value = '';
+  resetToggle();
 
-  readState[0] = 'not read';
+  //Reset toggle if it's on read
 }
 
 //Function used to determine the read/unread position of the toggle button
@@ -94,8 +142,14 @@ function haveReadState () {
   return (readState[0] === 'not read') ? readState[0] = 'read' : readState[0] = 'not read';
 }
 
-// Add Book frame
+//Reset 
+function resetToggle () {
+  if (readState[0] == 'read') {
+    document.getElementById('slider').click();
+  }
+}
 
+// Add Book frame
 Book.prototype.appendBook = function (genre='unsorted') {
   //Add Book Class
   const div = document.createElement('div');
@@ -107,12 +161,12 @@ Book.prototype.appendBook = function (genre='unsorted') {
   //Create a book element for each book submitted
   div.className = 'book';
   div.id = `${this.title}_book`;
-  if(this.genre = ' ') {
+  if(this.genre === '') {
     document.getElementById(`unsorted_shelf`).appendChild(div);
   } else {
+    console.log('hello');
     document.getElementById(`${this.genre}_shelf`).appendChild(div);
   }
-  
 
   //Append each info to the book cover 
   pTitle.className = 'title';
@@ -134,20 +188,8 @@ Book.prototype.appendBook = function (genre='unsorted') {
   document.getElementById(`${this.title}_${this.author}_${this.page}`).innerHTML = `${this.page} pages`;
 }
 
-// function addTriangleUp(genreVal) {
-//   const div = document.createElement('div');
-//   div.className = 'triangle up';
-//   console.log(document.getElementById(`${genreVal}_shelf`))
-//   document.getElementById(`${genreVal}_shelf`).appendChild(div);
-// }
-// function addTriangleDown(genreVal) {
-//   const div = document.createElement('div');
-//   div.className = 'triangle down';
-//   document.getElementById(`${genreVal}_shelf`).appendChild(div);
-// }
-
 //Finds which index the target genre is located at
-function searchTriangleInfo (target, myArray) {
+function searchLibrary (target, myArray) {
   for (var i=0; i < myArray.length; i++) {
     if (Object.keys(myArray[i])[0] === target) {
       return i;
@@ -155,46 +197,6 @@ function searchTriangleInfo (target, myArray) {
   }
   return -1;
 }
-
-// function addTriangle (genreVal = 'unsorted') {
-//   let genreIndex = searchTriangleInfo(genreVal, triangleInfo);
-//   //Test if triangle info array does not contain the genre, then we create a new obj in the array
-//   if (genreIndex === -1) {
-//     const newGenre =  {
-//       [genreVal]: {
-//         genre: genreVal,
-//         isUp: false
-//       }
-//     };
-//     triangleInfo.push(newGenre);
-//   }
-//   console.log('hello')
-//   //updates triangleInfo if a new genre is pushed onto the array
-//   genreIndex = searchTriangleInfo(genreVal, triangleInfo);
-//   //Use triangle array to detect the triangle position
-//   if (triangleInfo[genreIndex][genreVal].isUp === false) {
-//     console.log('it works!')
-//     console.log(genreVal)
-//     addTriangleUp(genreVal);
-//     //Set the position of the triangle to be true then push onto the array
-//     triangleInfo[genreIndex][genreVal].isUp = true;
-//   } else {
-//     addTriangleDown(genreVal);
-//     //Set the position of the triangle to be false
-//     triangleInfo[genreIndex][genreVal].isUp = false;
-//   }
-//   //Add triangle up or down
-//   //Update the triangle array
-// }
-
-//Add Bookcover
-
-// function addBookCover () {
-//   const div = document.createElement('div');
-//   div.className = 'bookcover';
-//   document.getElementById('')
-// }
-
 
 //Add Genre (Genre div, genre name, bookframe)
 
@@ -240,7 +242,7 @@ function addGenre (newGenre = 'unsorted') {
   else {document.getElementById(`${newGenre}_Genre`).style.backgroundImage = `url(src/synthwave.png)`}
 
   //to add clickability to the new genre row
-  old = $('.card').get(0);
+  // old = $('.card').get(0);
   $('.card').click(toggleFlex)
 }
 
@@ -266,9 +268,6 @@ window.onclick = function(event) {
     window.removeEventListener('scroll', noScroll);
   }
 }
-
-//Prevent clicking the background
-
 
 //Prevent Scrolling when you open up your modal
 
