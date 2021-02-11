@@ -196,10 +196,11 @@ html {
 }
 
 .exit-button {
-  position: relative;
+  position: absolute;
   color: black;
-  bottom: 20px;
+  bottom: 0;
   left: 3px;
+  padding: 4px;
   float: right;
   cursor: pointer;
   font-size: 25px;

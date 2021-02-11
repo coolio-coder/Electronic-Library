@@ -38,7 +38,6 @@ const capitalize = str => {
 //Used to test whether a title or author exists already
 function findMatchingName(target, myArray) {
   for (var i=0; i<myArray.length;i++) {
-    console.log(myLibrary[i].title)
     if(myLibrary[i].title.toLowerCase() === target.toLowerCase()) {
       return true;
     }
@@ -118,14 +117,15 @@ function resetToggle () {
   }
 }
 
-//remove book function
-function removeBook(element) {
-  console.log(element.parentNode.id)
-  let parent = document.getElementById(element.parentNode.id);
-  while (parent.firstChild) {
-    element.removeChild(element.lastChild);
+function findBookName(target, myArray) {
+  for (var i=0; i<myArray.length;i++) {
+    if(myLibrary[i].title.toLowerCase() === target.toLowerCase()) {
+      return i;
+    }
   }
 }
+
+
 
 // Add Book frame
 Book.prototype.appendBook = function (genre='unsorted') {
@@ -135,6 +135,7 @@ Book.prototype.appendBook = function (genre='unsorted') {
   const pAuthor = document.createElement('p');
   const pPages = document.createElement('p');
   const linebreak = document.createElement('br');
+  const aElement = document.createElement('a');
 
   //Create a book element for each book submitted
   div.className = 'book';
@@ -154,16 +155,35 @@ Book.prototype.appendBook = function (genre='unsorted') {
   pAuthor.id = `${this.title}_${this.author}`;
   pPages.className = 'pages';
   pPages.id = `${this.title}_${this.author}_${this.page}`;
-
+  aElement.className = 'exit-button';
+  aElement.id = `${this.title}_exitButton`
+  
+  //Title of the book
   document.getElementById(`${this.title}_book`).appendChild(pTitle);
   document.getElementById(`${this.title}`).innerHTML = `${this.title}`;
-
+  
+  //Insert Linebreak
   document.getElementById(`${this.title}_book`).appendChild(linebreak);
-
+  
+  //insert author, page number, and exit button
   document.getElementById(`${this.title}_book`).appendChild(pAuthor);
   document.getElementById(`${this.title}_${this.author}`).innerHTML = `By ${this.author}`;
   document.getElementById(`${this.title}_book`).appendChild(pPages);
   document.getElementById(`${this.title}_${this.author}_${this.page}`).innerHTML = `${this.page} pages`;
+  document.getElementById(`${this.title}_book`).appendChild(linebreak);
+  document.getElementById(`${this.title}_book`).appendChild(aElement);
+  document.getElementById(`${this.title}_exitButton`).innerHTML = '✖';
+  aElement.addEventListener('click', function(element) {
+    let bookParent = document.getElementById(element.srcElement.parentNode.id);
+    //Remove from myLibrary Array
+      //Find the name of the book that we're removing
+      var tempTitle = bookParent.id.split('_')[0].toString();
+      //Find the index of the title in myLibrary
+      myLibrary.splice(findBookName(tempTitle, myLibrary),1);
+    //Remove from the DOM
+    bookParent.remove();
+  }) 
+  
 
   document.getElementById(`${this.title}_book`).style.backgroundColor = randomColor();
 }
