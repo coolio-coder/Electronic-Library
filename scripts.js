@@ -1,8 +1,8 @@
 var myLibrary = [];
-
 const book1 = new Book('Harry Potter', 'Jk Rowling', 636, 'adventure', 'read');
-const book2 = new Book('A Song of Ice and Fire', 'George R. R. Martin', 694, 'adventure' ,'not read');
-const book3 = new Book('Eragon', 'Christopher Paolini', 509, 'adventure' ,'read');
+// const book2 = new Book('A Song of Ice and Fire', 'George R. R. Martin', 694, 'adventure' ,'not read');
+// const book3 = new Book('Eragon', 'Christopher Paolini', 509, 'adventure' ,'read');
+
 
 function Book (title, author, page, genre, read) {
   this.title = title;
@@ -10,22 +10,18 @@ function Book (title, author, page, genre, read) {
   this.page = page;
   this.genre = genre;
   this.read = read;
+}
 
-  //This method will add a book to the library
-  // this.addToLibrary = function () {
-  //   myLibrary.push(this)
-  //   console.log(myLibrary);
-  // }
-
-  //This method will remove a book based on the location of the book
-  this.removeBook = function () {
-    myLibrary.splice((myLibrary.indexOf(this)),1)
-    console.log(myLibrary);
-  }
-
-  this.aboutBook = function () {
-    console.log( `I have ${readState[0].haveRead} ${titleVal}, which is written by ${authorVal}. It has ${pageVal} pages and is considered a ${genreVal} book`);
-  }
+Book.prototype.addToLibrary = function () {
+  myLibrary.push(this)
+  console.log(myLibrary);
+}
+Book.prototype.removeBook = function () {
+  myLibrary.splice((myLibrary.indexOf(this)),1)
+  console.log(myLibrary);
+}
+Book.prototype.aboutBook = function () {
+  console.log( `I have ${readState[0].haveRead} ${titleVal}, which is written by ${authorVal}. It has ${pageVal} pages and is considered a ${genreVal} book`);
 }
 
 Book.prototype.addToLibrary1 = function () {
@@ -43,7 +39,25 @@ const capitalize = str => {
   } return '';
 }
 
+
 /********************************************ADD BOOK BUTTON***********************************/
+
+//Used to test whether a title or author exists already
+function findMatchingName(target, myArray) {
+  for (var i=0; i<myArray.length;i++) {
+    if(myLibrary[i].title.toLowerCase() === target.toLowerCase()) {
+      return true;
+    }
+  }
+}
+
+//Color palatte
+var color = ['#ff2975', '#ffd319', '#ff901f', '	#f222ff', '	#8c1eff'];
+function randomColor() {
+  let randomNum = Math.round(Math.random()*5);
+  return color[randomNum];
+}
+
 
 //Reset the Slider
 function changeSlider() {
@@ -54,7 +68,7 @@ function changeSlider() {
 }
 
 // Add to Library //    
-function getInputVal () {
+function submitBook () {
   var titleVal = document.getElementById('title').value,
       authorVal = document.getElementById('author').value,
       pageVal = document.getElementById('page').value
@@ -63,23 +77,23 @@ function getInputVal () {
   //Capitalize all strings
   console.log(genreVal)
   if(titleVal, authorVal, pageVal === '') {
-    alert('Please fill out the required information.')
+    alert('Please fill out the required information.');
+  } else if (findMatchingName(titleVal,myLibrary) === true) {
+    alert("You've entered this book already. Please enter another book!");
   } else {
     titleVal = capitalize(titleVal);
     authorVal = capitalize(authorVal);
     genreVal = capitalize(genreVal);
     //Add the book to the library
-    myLibrary.push(new Books(titleVal, authorVal, pageVal, genreVal, readState[0]))
+    myLibrary.push(new Book(titleVal, authorVal, pageVal, genreVal, readState[0]))
     //Based on the genre that user inputs, this conditional will decide where to put the book
     if(genreList.includes(genreVal)) {
-      addTriangle(genreVal);
+      myLibrary[myLibrary.length - 1].appendBook()
     } else if (genreVal === '') {
-      console.log('unsorted');
-      addTriangle('unsorted')
+      myLibrary[myLibrary.length - 1].appendBook()
     } else if (!genreList.includes(genreVal) || genreVal !== '') {
-      console.log(genreVal)
       addGenre(genreVal);
-      addTriangle(genreVal);
+      myLibrary[myLibrary.length - 1].appendBook()
     }
   }
 
@@ -91,8 +105,9 @@ function getInputVal () {
   document.getElementById('author').value = '';
   document.getElementById('page').value = '';
   document.getElementById('Genre').value = '';
+  resetToggle();
 
-  readState[0] = 'not read';
+  //Reset toggle if it's on read
 }
 
 //Function used to determine the read/unread position of the toggle button
@@ -102,38 +117,88 @@ function haveReadState () {
   return (readState[0] === 'not read') ? readState[0] = 'read' : readState[0] = 'not read';
 }
 
+//Reset 
+function resetToggle () {
+  if (readState[0] == 'read') {
+    document.getElementById('slider').click();
+  }
+}
+
+function findBookName(target, myArray) {
+  for (var i=0; i<myArray.length;i++) {
+    if(myLibrary[i].title.toLowerCase() === target.toLowerCase()) {
+      return i;
+    }
+  }
+}
+
+
 
 // Add Book frame
-var triangleInfo = []
-
-function addTriangleUp(genreVal) {
+Book.prototype.appendBook = function (genre='unsorted') {
+  //Add Book Class
   const div = document.createElement('div');
-  div.className = 'triangle up';
-  console.log(document.getElementById(`${genreVal}_shelf`))
-  document.getElementById(`${genreVal}_shelf`).appendChild(div);
-}
-function addTriangleDown(genreVal) {
-  const div = document.createElement('div');
-  div.className = 'triangle down';
-  document.getElementById(`${genreVal}_shelf`).appendChild(div);
-}
+  const pTitle = document.createElement('p');
+  const pAuthor = document.createElement('p');
+  const pPages = document.createElement('p');
+  const linebreak = document.createElement('br');
+  const aElement = document.createElement('a');
 
-// var bookshelf = [];
-// function addNewGenre (genre) {
-//   const newGenre =  {
-//     [genre]: {
-//       genre: genre,
-//       isUp: false
-//     }
-//   };
-//   bookshelf.push(newGenre);
-// }
-// addNewGenre('Romance');
-// addNewGenre('Action');
-// addNewGenre('Adventure');
+  //Create a book element for each book submitted
+  div.className = 'book';
+  div.id = `${this.title}_book`;
+  if(this.genre === '') {
+    document.getElementById(`unsorted_shelf`).appendChild(div);
+  } else {
+    console.log('hello');
+    document.getElementById(`${this.genre}_shelf`).appendChild(div);
+  }
+
+  //Append each info to the book cover 
+  pTitle.className = 'title';
+  pTitle.id = this.title;
+  console.log(pTitle)
+  pAuthor.className = 'author';
+  pAuthor.id = `${this.title}_${this.author}`;
+  pPages.className = 'pages';
+  pPages.id = `${this.title}_${this.author}_${this.page}`;
+  aElement.className = 'exit-button';
+  aElement.id = `${this.title}_exitButton`
+  
+  //Title of the book
+  document.getElementById(`${this.title}_book`).appendChild(pTitle);
+  document.getElementById(`${this.title}`).innerHTML = `${this.title}`;
+  
+  //Insert Linebreak
+  document.getElementById(`${this.title}_book`).appendChild(linebreak);
+  
+  //insert author, page number, and exit button
+  document.getElementById(`${this.title}_book`).appendChild(pAuthor);
+  document.getElementById(`${this.title}_${this.author}`).innerHTML = `By ${this.author}`;
+  document.getElementById(`${this.title}_book`).appendChild(pPages);
+  document.getElementById(`${this.title}_${this.author}_${this.page}`).innerHTML = `${this.page} pages`;
+  document.getElementById(`${this.title}_book`).appendChild(linebreak);
+  document.getElementById(`${this.title}_book`).appendChild(aElement);
+  document.getElementById(`${this.title}_exitButton`).innerHTML = '✖';
+
+  aElement.addEventListener('click', function(event) {
+    console.log(event);
+    let bookParent = document.getElementById(event.srcElement.parentNode.id);
+    //Remove from myLibrary Array
+      //Find the name of the book that we're removing
+      var tempTitle = bookParent.id.split('_')[0].toString();
+      //Find the index of the title in myLibrary
+      myLibrary.splice(findBookName(tempTitle, myLibrary),1);
+    //Remove from the DOM
+    bookParent.remove();
+  }) 
+  
+
+  document.getElementById(`${this.title}_book`).style.backgroundColor = randomColor();
+}
 
 //Finds which index the target genre is located at
-function searchTriangleInfo (target, myArray) {
+function searchLibrary (target, myArray) {
   for (var i=0; i < myArray.length; i++) {
     if (Object.keys(myArray[i])[0] === target) {
       return i;
@@ -141,46 +206,6 @@ function searchTriangleInfo (target, myArray) {
   }
   return -1;
 }
-
-function addTriangle (genreVal = 'unsorted') {
-  let genreIndex = searchTriangleInfo(genreVal, triangleInfo);
-  //Test if triangle info array does not contain the genre, then we create a new obj in the array
-  if (genreIndex === -1) {
-    const newGenre =  {
-      [genreVal]: {
-        genre: genreVal,
-        isUp: false
-      }
-    };
-    triangleInfo.push(newGenre);
-  }
-  console.log('hello')
-  //updates triangleInfo if a new genre is pushed onto the array
-  genreIndex = searchTriangleInfo(genreVal, triangleInfo);
-  //Use triangle array to detect the triangle position
-  if (triangleInfo[genreIndex][genreVal].isUp === false) {
-    console.log('it works!')
-    console.log(genreVal)
-    addTriangleUp(genreVal);
-    //Set the position of the triangle to be true then push onto the array
-    triangleInfo[genreIndex][genreVal].isUp = true;
-  } else {
-    addTriangleDown(genreVal);
-    //Set the position of the triangle to be false
-    triangleInfo[genreIndex][genreVal].isUp = false;
-  }
-  //Add triangle up or down
-  //Update the triangle array
-}
-
-//Add Bookcover
-
-// function addBookCover () {
-//   const div = document.createElement('div');
-//   div.className = 'bookcover';
-//   document.getElementById('')
-// }
-
 
 //Add Genre (Genre div, genre name, bookframe)
 
@@ -204,7 +229,6 @@ function addGenre (newGenre = 'unsorted') {
   containerDiv.id = `${newGenre}_shelf`;
 
   //Add new items to the main body
-  
   document.getElementById('bookshelf').appendChild(div);
 
   //For the genre row
@@ -226,7 +250,7 @@ function addGenre (newGenre = 'unsorted') {
   else {document.getElementById(`${newGenre}_Genre`).style.backgroundImage = `url(src/synthwave.png)`}
 
   //to add clickability to the new genre row
-  old = $('.card').get(0);
+  // old = $('.card').get(0);
   $('.card').click(toggleFlex)
 }
 
@@ -252,9 +276,6 @@ window.onclick = function(event) {
     window.removeEventListener('scroll', noScroll);
   }
 }
-
-//Prevent clicking the background
-
 
 //Prevent Scrolling when you open up your modal
 

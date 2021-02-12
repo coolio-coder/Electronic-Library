@@ -111,7 +111,6 @@ html {
 	color: #ff2975;
 	font-size: 90px;
 	&.open {
-		height: 35%;
 		font-size: 60px;
 		transition:
 		cubic-bezier(0.82, 0.13, 0.27, 1.04),
@@ -122,7 +121,7 @@ html {
 			overflow:visible;
 		}
 		& .book {
-			transform:rotateY( 40deg );
+			transform:rotateY( 48deg );
 			box-shadow:-10px 10px 10px 10px rgba(255,255,255,.2), -2px 0px 0px 0px #888;
 			transition:all 0.5s;
 			transition-delay:
@@ -139,8 +138,9 @@ html {
 		}
 	}
 	& .book {
-		width: 200px;
-		box-shadow: 0px 2px 10px rgb(0 0 0 / 30%);
+		width: 310px;
+		height: 300px;
+		box-shadow: 0px 2px 10px rgb(255 255 255 / 30%);
 		overflow: hidden;
 		border: 2px solid red;
 		position: relative;
@@ -173,8 +173,6 @@ html {
 	left: 15px;
 	overflow-y: auto;
 	overflow-x: hidden;
-	border: 2px solid red;
-
 	padding: 20px;
 	&.hidden {
 		position: relative;
@@ -183,44 +181,32 @@ html {
 }
 
 .book {
-	width: 50px;
-	height: 200px;
+	width: 100px;
+	height: 300px;
 	padding: 20px;
 	margin: 10px 0px;
 	float: left;
-	border: 2px solid red;
-	background: white;
+	background:#ff2975;
+	opacity: 85%;
 	color: black;
-	font-size: 18px;
+	font-size: 25px;
 	text-align: center;
+	& .title {
+		font-size: 40px;
+	}
 }
 
-.triangle_container {
-	display: block;
-	position: relative;
-	left: 15px;
-	overflow-y: auto;
-	overflow-x: hidden;
-	border: 2px solid red;
+.exit-button {
+	position: absolute;
+	color: black;
+	bottom: 0;
+	left: 3px;
+	padding: 4px;
+	float: right;
+	cursor: pointer;
+	font-size: 25px;
 }
-// .triangle {
-// 	width: 0;
-// 	height: 0;
-// 	opacity: 0.6;
-// 	margin: 20px 0px;
-// 	position: relative;
-// 	float: left;
-// }
-// .up {
-// 	border-left: 120px solid transparent;
-// 	border-right: 120px solid transparent;
-// 	border-bottom: 170px solid #c200db;
-// }
-// .down {
-// 	border-left: 120px solid transparent;
-// 	border-right: 120px solid transparent;
-// 	border-top: 170px solid #c200db;
-// }
+
 button {
 	color: #f222ff;
 	font-size: 30px;
