@@ -132,8 +132,6 @@ function findBookName(target, myArray) {
   }
 }
 
-
-
 // Add Book frame
 Book.prototype.appendBook = function (genre='unsorted') {
   //Add Book Class
